@@ -1,31 +1,45 @@
 package com.example.myapplication;
 
 import android.os.Bundle;
-import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
-
-import java.util.List;
 
 public class recordViewer extends AppCompatActivity {
 
-    RecyclerView recordView;
+    ListView lv_vermogenList;
+    DataBaseHelper dataBaseHelper;
+    ArrayAdapter vermogenArrayAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-        recordView = (RecyclerView) findViewById(R.id.recordView);
-
-        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_record_viewer);
+        super.onCreate(savedInstanceState);
 
-        DataBaseHelper dataBaseHelper = new DataBaseHelper(recordViewer.this);
-        List<meting> everyone = dataBaseHelper.getEveryone();
-        Log.d("everyone", String.valueOf(everyone));
-        ArrayAdapter vermogenArrayAdapter = new ArrayAdapter<meting>(recordViewer.this, android.R.layout.simple_list_item_1, everyone);
-        //recordView.setAdapter(vermogenArrayAdapter);
+        dataBaseHelper = new DataBaseHelper(recordViewer.this);
+        lv_vermogenList = findViewById(R.id.lv_vermogenList);
+        updateListView();
 
+        lv_vermogenList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+                meting clickedMeting = (meting) adapterView.getItemAtPosition(i);
+                dataBaseHelper.deleteOne(clickedMeting);
+                Toast.makeText(recordViewer.this, "deleted meting", Toast.LENGTH_SHORT).show();
+                updateListView();
+                return false;
+            }
+        });
     }
+
+    private void updateListView() {
+        vermogenArrayAdapter = new ArrayAdapter<meting>(recordViewer.this, android.R.layout.simple_list_item_1, dataBaseHelper.getEveryone());
+        lv_vermogenList.setAdapter(vermogenArrayAdapter);
+    }
+
+
 }

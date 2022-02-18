@@ -55,6 +55,21 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         }
     }
 //bla
+    public boolean deleteOne(meting meting){
+        //delete record if found in database
+        SQLiteDatabase db = this.getWritableDatabase();
+        String queryString = "DELETE FROM " + VERMOGEN_TABLE + " WHERE " + COLUMN_ID + " = " + meting.getId();
+        Cursor cursor = db.rawQuery(queryString, null);
+
+        if (cursor.moveToFirst()) {
+            return true;
+        }
+        else {
+            return false;
+        }
+
+    }
+
     public List<meting> getEveryone(){
         List<meting> returnList = new ArrayList<>();
 
