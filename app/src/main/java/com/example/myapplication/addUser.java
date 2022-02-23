@@ -1,5 +1,7 @@
 package com.example.myapplication;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -9,6 +11,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class addUser extends AppCompatActivity {
@@ -16,6 +19,7 @@ public class addUser extends AppCompatActivity {
     EditText naam, gewicht, datum;
     Spinner oefening;
     Button btn_start;
+    AlertDialog.Builder builder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,21 +44,33 @@ public class addUser extends AppCompatActivity {
     //buttonslisteners
     public void startMeting(View v){
 
-        meting meet;
-        try {
-            meet = new meting(-1, naam.getText().toString(), datum.getText().toString(), oefening.getSelectedItem().toString(), Integer.parseInt(gewicht.getText().toString()));
-            Log.d("information", meet.toString());
-        }
-        catch (Exception e){
+        String infoString;
+        infoString = naam.getText().toString() + "," + datum.getText().toString() + "," + oefening.getSelectedItem().toString() + "," + gewicht.getText().toString();
+
+        Intent i = new Intent(this, recordVermogen.class);
+        i.putExtra("meting", infoString);
+        startActivity(i);
+    }
+    public void checkBox(View v){
+
+        boolean b = naam.getText().toString().isEmpty() | datum.getText().toString().isEmpty() | gewicht.getText().toString().isEmpty();
+        Log.d("iformati", String.valueOf(naam.getText().toString().isEmpty()));
+        if (b) {
             Toast.makeText(addUser.this, "vul wat in, nerd", Toast.LENGTH_SHORT).show();
-            meet = new meting(-1, "error", "error", "error", 0);
             Log.d("information", "niks ingevuld");
         }
-
-        DataBaseHelper dataBaseHelper = new DataBaseHelper(addUser.this);
-
-        boolean success = dataBaseHelper.addOne(meet);
-
-        Log.d("information", String.valueOf(success));
+        else {
+            builder = new AlertDialog.Builder(this);
+            builder.setTitle("Start?")
+                    .setMessage("Wil je de meting nu beginnen?")
+                    .setCancelable(true)
+                    .setPositiveButton("Ja", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            startMeting(v);
+                        }
+                    })
+                    .show();
+        }
     }
 }

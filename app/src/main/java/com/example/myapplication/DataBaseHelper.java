@@ -18,6 +18,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public static final String COLUMN_DATUM = "DATUM";
     public static final String COLUMN_OEFENING = "OEFENING";
     public static final String COLUMN_GEWICHT = "GEWICHT";
+    public static final String COLUMN_POINTS = "POINTS";
     public static final String COLUMN_ID = "ID";
 
     public DataBaseHelper(@Nullable Context context) {
@@ -27,7 +28,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     // called whenever a new instance of the db is made
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String createTableStatement = "CREATE TABLE " + VERMOGEN_TABLE + " (" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_NAAM + " TEXT, " + COLUMN_DATUM + " TEXT, " + COLUMN_OEFENING + " TEXT, " + COLUMN_GEWICHT + " INT)";
+        String createTableStatement = "CREATE TABLE " + VERMOGEN_TABLE + " (" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_NAAM + " TEXT, " + COLUMN_DATUM + " TEXT, " + COLUMN_OEFENING + " TEXT, " + COLUMN_GEWICHT + " INT," + COLUMN_POINTS + " TEXT)";
         db.execSQL(createTableStatement);
     }
 
@@ -45,6 +46,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         cv.put(COLUMN_DATUM, meet.getDatum());
         cv.put(COLUMN_OEFENING, meet.getOefening());
         cv.put(COLUMN_GEWICHT, meet.getGewicht());
+        cv.put(COLUMN_POINTS, meet.getPointList());
 
         long insert = db.insert(VERMOGEN_TABLE, null, cv);
         if (insert == -1){
@@ -86,8 +88,9 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 String datum = cursor.getString(2);
                 String oefening = cursor.getString(3);
                 int gewicht = cursor.getInt(4);
+                String pointList = cursor.getString(5);
 
-                meting meting = new meting(id, naam, datum, oefening, gewicht);
+                meting meting = new meting(id, naam, datum, oefening, gewicht, pointList);
                 returnList.add(meting);
 
             } while (cursor.moveToNext());

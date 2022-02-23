@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
         <activity
+            android:name=".recordEnd"
+            android:exported="false" />
+        <activity
+            android:name=".recordVermogen"
+            android:exported="false" />
+        <activity
             android:name=".recordViewer"
             android:exported="false" />
         <activity

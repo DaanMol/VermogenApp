@@ -6,15 +6,17 @@ public class meting {
     private String datum;
     private String oefening;
     private int gewicht;
+    private String pointList;
 
     // constructor
 
-    public meting(int id, String naam, String datum, String oefening, int gewicht) {
+    public meting(int id, String naam, String datum, String oefening, int gewicht, String pointList) {
         this.id = id;
         this.naam = naam;
         this.datum = datum;
         this.oefening = oefening;
         this.gewicht = gewicht;
+        this.pointList = pointList;
     }
 
     public meting() {
@@ -29,7 +31,8 @@ public class meting {
                 ", naam='" + naam + '\'' +
                 ", datum='" + datum + '\'' +
                 ", oefening='" + oefening + '\'' +
-                ", gewicht=" + gewicht +
+                ", gewicht=" + gewicht + '\'' +
+                ", pointList=" + pointList +
                 '}';
     }
 
@@ -68,12 +71,18 @@ public class meting {
         this.oefening = oefening;
     }
 
-    public int getGewicht() {
-        return gewicht;
-    }
+    public int getGewicht() { return gewicht; }
 
     public void setGewicht(int gewicht) {
         this.gewicht = gewicht;
+    }
+
+    public String getPointList() {
+        return pointList;
+    }
+
+    public void setPointList(String naam) {
+        this.pointList = pointList;
     }
 
 
