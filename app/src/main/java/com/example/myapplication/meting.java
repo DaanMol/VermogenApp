@@ -31,8 +31,7 @@ public class meting {
                 ", naam='" + naam + '\'' +
                 ", datum='" + datum + '\'' +
                 ", oefening='" + oefening + '\'' +
-                ", gewicht=" + gewicht + '\'' +
-                ", pointList=" + pointList +
+                ", gewicht=" + gewicht +
                 '}';
     }
 

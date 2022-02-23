@@ -34,6 +34,15 @@ public class recordViewer extends AppCompatActivity {
                 return false;
             }
         });
+
+//        lv_vermogenList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+//                meting clickedMeting = (meting) adapterView.getItemAtPosition(i);
+//                Intent j = new Intent(this, recordEnd.class);
+//                startActivity(j);
+//            }
+//        });
     }
 
     private void updateListView() {

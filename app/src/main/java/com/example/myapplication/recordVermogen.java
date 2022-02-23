@@ -93,7 +93,7 @@ public class recordVermogen extends AppCompatActivity {
 
             series.appendData(new DataPoint(pointsPlotted, changeInAcceleration), true, pointsPlotted);
             viewport.setMaxX(pointsPlotted);
-            viewport.setMinX(pointsPlotted - 200);
+            viewport.setMinX(pointsPlotted - 50);
             viewport.setMaxY(20);
         }
 
@@ -138,9 +138,6 @@ public class recordVermogen extends AppCompatActivity {
     }
 
     public void saveMeting(View v){
-
-        DataBaseHelper dataBaseHelper = new DataBaseHelper(recordVermogen.this);
-
         // get user info
         Intent i = getIntent();
         String message = i.getStringExtra("meting");
@@ -150,11 +147,6 @@ public class recordVermogen extends AppCompatActivity {
         String datum = metingList.get(1);
         String oefening = metingList.get(2);
         int gewicht = Integer.parseInt(metingList.get(3));
-
-        // save record to db
-        meting meet = new meting(-1, naam, datum, oefening, gewicht, pointList.toString());
-        boolean success = dataBaseHelper.addOne(meet);
-        Log.d("iformati", meet.toString());
 
         Intent j = new Intent(this, recordEnd.class);
         j.putExtra("meting", message + "," + pointList.toString());
