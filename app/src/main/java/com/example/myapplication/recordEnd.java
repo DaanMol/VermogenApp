@@ -3,6 +3,8 @@ package com.example.myapplication;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -50,7 +52,6 @@ public class recordEnd extends AppCompatActivity {
         viewport.setScalable(true);
         viewport.setXAxisBoundsManual(true);
 
-
         // determine graph size
         int pointsPlotted = metingList.size();
         for (int j = 0; j < pointsPlotted; j++)
@@ -59,5 +60,11 @@ public class recordEnd extends AppCompatActivity {
         viewport.setMinX(0);
         viewport.setMaxY(20);
         graph.addSeries(series);
+    }
+
+    public void toMain(View v){
+        Toast.makeText(recordEnd.this, "Meting opgeslagen", Toast.LENGTH_SHORT).show();
+        Intent i = new Intent(this, MainActivity.class);
+        startActivity(i);
     }
 }

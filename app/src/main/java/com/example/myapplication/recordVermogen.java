@@ -86,17 +86,15 @@ public class recordVermogen extends AppCompatActivity {
             // update the graph
             pointsPlotted++;
 
-            if (pointsPlotted> 100){
+            if (pointsPlotted> 1000){
                 pointsPlotted = 1;
                 series.resetData( new DataPoint[] { new DataPoint(1,0) });
-                Log.d("iformati", pointList.toString());
             }
 
             series.appendData(new DataPoint(pointsPlotted, changeInAcceleration), true, pointsPlotted);
             viewport.setMaxX(pointsPlotted);
             viewport.setMinX(pointsPlotted - 200);
             viewport.setMaxY(20);
-
         }
 
         @Override
