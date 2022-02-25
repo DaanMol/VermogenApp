@@ -37,11 +37,9 @@ public class addUser extends AppCompatActivity {
         datum = findViewById(R.id.datum);
         oefening = findViewById(R.id.spinner1);
         btn_start = findViewById((R.id.btn_start));
-
-
-
     }
-    //buttonslisteners
+
+    //buttons listeners
     public void startMeting(View v){
 
         String infoString;
@@ -51,6 +49,8 @@ public class addUser extends AppCompatActivity {
         i.putExtra("meting", infoString);
         startActivity(i);
     }
+
+    // assess value of all fields and check if user is ready
     public void checkBox(View v){
 
         boolean b = naam.getText().toString().isEmpty() | datum.getText().toString().isEmpty() | gewicht.getText().toString().isEmpty();

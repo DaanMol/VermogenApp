@@ -83,7 +83,7 @@ public class Accelerometer extends AppCompatActivity {
 
             series.appendData(new DataPoint(pointsPlotted, changeInAcceleration), true, pointsPlotted);
             viewport.setMaxX(pointsPlotted);
-            viewport.setMinX(pointsPlotted - 200);
+            viewport.setMinX(pointsPlotted - 50);
             viewport.setMaxY(20);
 
         }
